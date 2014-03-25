@@ -11,6 +11,7 @@
     <ul class="nav nav-tabs">
       <li ng-class="{active: currentPath === '/'}"><a href="#/">Home</a></li>
       <li ng-class="{active: currentPath === '/hash'}"><a href="#/hash">Hash</a></li>
+      <li ng-class="{active: currentPath === '/enc-dec'}"><a href="#/enc-dec">Enc / Dec</a></li>
     </ul>
     <div id="contents" ng-view></div>
   </div>
@@ -23,7 +24,10 @@
   <script src="/js/vendor/crypto-js/rollups/sha1.js"></script>
   <script src="/js/vendor/crypto-js/rollups/sha256.js"></script>
   <script src="/js/vendor/crypto-js/rollups/sha512.js"></script>
+  <script src="/js/vendor/crypto-js/components/core-min.js"></script>
+  <script src="/js/vendor/crypto-js/components/enc-base64-min.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/hash.js"></script>
+  <script src="/js/enc-dec.js"></script>
 </body>
 </html>
