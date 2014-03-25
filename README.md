@@ -1,4 +1,4 @@
-# Google Chrome Extension of CTF tools (仮)
+# Chrome exTension for ctF (仮)
 
 It may useful to capture the flag.
 
