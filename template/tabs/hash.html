@@ -1,18 +1,25 @@
 <div>
   <div class="panel panel-default">
-    <div class="panel-heading">MD5 hash generator</div>
+    <div class="panel-heading">hash generator</div>
     <form class="form-horizontal panel-body">
+      <div class="form-group">
+        <label class="col-md-1 control-label">Method</label>
+        <div class="col-md-5">
+          <select class="form-control" ng-options="method for method in hashMethods"
+            ng-model="hashName"></select>
+        </div>
+      </div>
       <div class="form-group">
         <label class="col-md-1 control-label">Text</label>
         <div class="col-md-5">
           <textarea class="form-control col-md-5" rows="2" placeholder="text to md5"
-            ng-model="md5Text"></textarea>
+            ng-model="hashText"></textarea>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-1 control-label">Result</label>
         <div class="col-md-5">
-          <pre>{{md5Hash}}</pre>
+          <pre>{{hashResult}}</pre>
         </div>
       </div>
     </form>
