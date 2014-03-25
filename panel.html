@@ -7,23 +7,18 @@
 </head>
 <body ng-app="flagBird">
 
-  <div class="container">
+  <div class="container" ng-controller="MainCtrl">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-      <li><a href="#hash" data-toggle="tab">Hash</a></li>
+      <li ng-class="{active: currentPath === '/'}"><a href="#/">Home</a></li>
+      <li ng-class="{active: currentPath === '/hash'}"><a href="#/hash">Hash</a></li>
     </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="home">
-        hi!
-      </div>
-      <div class="tab-pane" id="hash" hash-tab></div>
-    </div>
+    <div id="contents" ng-view></div>
   </div>
 
   <script src="/js/vendor/jquery-2.1.0.min.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
   <script src="/js/vendor/angular.min.js"></script>
+  <script src="/js/vendor/angular-route.min.js"></script>
   <script src="/js/vendor/crypto-js/rollups/md5.js"></script>
   <script src="/js/vendor/crypto-js/rollups/sha1.js"></script>
   <script src="/js/vendor/crypto-js/rollups/sha256.js"></script>
