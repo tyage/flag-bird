@@ -1,25 +1,25 @@
 <div>
   <div class="panel panel-default">
-    <div class="panel-heading">hash generator</div>
+    <div class="panel-heading">Hash generator</div>
     <form class="form-horizontal panel-body">
       <div class="form-group">
         <label class="col-md-1 control-label">Method</label>
         <div class="col-md-5">
-          <select class="form-control" ng-options="method for method in hashMethods"
-            ng-model="hashName"></select>
+          <select class="form-control" ng-options="v as k for (k, v) in hashMethods"
+            ng-model="hashMethod"></select>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-1 control-label">Text</label>
         <div class="col-md-5">
-          <textarea class="form-control col-md-5" rows="2" placeholder="text to md5"
-            ng-model="hashText"></textarea>
+          <textarea class="form-control col-md-5" rows="2" placeholder="input text here"
+            ng-model="inputText"></textarea>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-1 control-label">Result</label>
         <div class="col-md-5">
-          <pre>{{hashResult}}</pre>
+          <pre>{{hashMethod(inputText).toString()}}</pre>
         </div>
       </div>
     </form>
