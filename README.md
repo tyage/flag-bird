@@ -1,4 +1,4 @@
-# Chrome exTension for ctF (仮)
+# Flag Bird Google Chrome Extension
 
 It may useful to capture the flag.
 
