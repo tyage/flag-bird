@@ -1,10 +1,40 @@
 angular.module('encDecTab', [])
   .controller('EncDecCtrl', ['$scope', function($scope) {
+    var cryptoJsEnc = function(str, method) {
+      var utf8Str = CryptoJS.enc.Utf8.parse(str);
+      return utf8Str.toString(method);
+    };
+    var cryptoJsDec = function(str, method) {
+      var decodedStr = method.parse(str);
+      return decodedStr.toString(CryptoJS.enc.Utf8);
+    };
     $scope.encodedFocus = false;
     $scope.decodedFocus = false;
     $scope.methods = {
-      base64: CryptoJS.enc.Base64,
-      hex: CryptoJS.enc.Hex
+      base64: {
+        enc: function(str) {
+          return cryptoJsEnc(str, CryptoJS.enc.Base64);
+        },
+        dec: function(str) {
+          return cryptoJsDec(str, CryptoJS.enc.Base64);
+        },
+      },
+      hex: {
+        enc: function(str) {
+          return cryptoJsEnc(str, CryptoJS.enc.Hex);
+        },
+        dec: function(str) {
+          return cryptoJsDec(str, CryptoJS.enc.Hex);
+        }
+      },
+      url: {
+        enc: function(str) {
+          return encodeURIComponent(str);
+        },
+        dec: function(str) {
+          return decodeURIComponent(str);
+        }
+      }
     };
     $scope.method = $scope.methods.base64;
     $scope.$watch('decoded', function(newVal) {
@@ -15,8 +45,7 @@ angular.module('encDecTab', [])
         $scope.encoded = '';
         return;
       }
-      var str = CryptoJS.enc.Utf8.parse(newVal);
-      $scope.encoded = str.toString($scope.method);
+      $scope.encoded = $scope.method.enc(newVal);
     });
     $scope.$watch('encoded', function(newVal) {
       if ($scope.decodedFocus) {
@@ -26,7 +55,6 @@ angular.module('encDecTab', [])
         $scope.decoded = '';
         return;
       }
-      var str = $scope.method.parse(newVal);
-      $scope.decoded = str.toString(CryptoJS.enc.Utf8);
+      $scope.decoded = $scope.method.dec(newVal);
     });
   }]);
