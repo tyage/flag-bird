@@ -12,3 +12,6 @@ It may useful to capture the flag.
 
 ## Usage
 Import src directory as a chrome extension.
+
+## Screenshots
+![md5](https://raw.githubusercontent.com/tyage/flag-bird/master/screenshot/md5.gif)
