@@ -9,3 +9,6 @@ It may useful to capture the flag.
 - ~~SQL Injection Tool (also blind SQLi)~~
 - ~~Documentations for some vuln, crypto~~
 - ~~CTF Time Rating Calculator~~
+
+## Usage
+Import src directory as a chrome extension.
