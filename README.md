@@ -12,8 +12,8 @@ It may help you to capture the flag.
 - ~~Simple Binary Editor~~
 
 ## Usage
-Import src directory as a chrome extension.
-Open developer tools in any page.
+1. Import src directory as a chrome extension.
+2. Open developer tools in any page.
 
 ## Screenshots
 ![md5](https://raw.githubusercontent.com/tyage/flag-bird/master/screenshot/md5.gif)
