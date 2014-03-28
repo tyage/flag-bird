@@ -1,6 +1,6 @@
 # Flag Bird Google Chrome Extension
 
-It may useful to capture the flag.
+It may help you to capture the flag.
 
 - ~~HTTP Request~~
 - ~~Network Capture (http, websocket, ...)~~
