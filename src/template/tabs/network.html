@@ -1,0 +1,27 @@
+<div>
+  <div ng-repeat="request in requests" class="panel panel-default">
+    <div class="panel-heading">{{request.startedDateTime.toLocaleString()}} ({{request.time}}s)</div>
+    <div class="list-group">
+      <div class="list-group-item">
+        <div>{{request.request.method}} {{request.request.url}} {{request.request.httpVersion}}</div>
+        <div ng-repeat="header in request.request.headers">
+          {{header.name}}: {{header.value}}
+        </div>
+      </div>
+      <div class="list-group-item">
+        <div ng-repeat="header in request.response.headers">
+          {{header.name}}: {{header.value}}
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{request.response.content.mimeType}}
+            ({{request.response.content.encoding || 'raw'}})
+          </div>
+          <div class="panel-body">
+            <pre>{{request.response.content.content}}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

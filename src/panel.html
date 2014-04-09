@@ -1,17 +1,18 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" ng-app="flagBird" ng-csp>
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/panel.css">
 </head>
-<body ng-app="flagBird">
+<body>
 
   <div class="container" ng-controller="MainCtrl">
     <ul class="nav nav-tabs">
       <li ng-class="{active: currentPath === '/'}"><a href="#/">Home</a></li>
       <li ng-class="{active: currentPath === '/hash'}"><a href="#/hash">Hash</a></li>
       <li ng-class="{active: currentPath === '/enc-dec'}"><a href="#/enc-dec">Enc / Dec</a></li>
+      <li ng-class="{active: currentPath === '/network'}"><a href="#/network">Network</a></li>
     </ul>
     <div id="contents" ng-view></div>
   </div>
@@ -29,5 +30,6 @@
   <script src="/js/app.js"></script>
   <script src="/js/hash.js"></script>
   <script src="/js/enc-dec.js"></script>
+  <script src="/js/network.js"></script>
 </body>
 </html>
