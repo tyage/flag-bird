@@ -6,5 +6,4 @@ angular.module('hashTab', [])
       sha256: CryptoJS.SHA256,
       sha512: CryptoJS.SHA512
     };
-    $scope.hashMethod = $scope.hashMethods.md5;
   }]);
