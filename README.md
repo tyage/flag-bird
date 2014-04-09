@@ -3,7 +3,7 @@
 It may help you to capture the flag.
 
 - ~~HTTP Request~~
-- ~~Network Capture (http, websocket, ...)~~
+- Network Capture
 - Encoder and Decoder (uri encode, base64, caeser, hex)
 - Generate hashes (md5, sha1, sha256, sha512)
 - ~~SQL Injection Tool (also blind SQLi)~~
