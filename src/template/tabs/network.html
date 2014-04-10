@@ -4,12 +4,12 @@
     <div class="list-group">
       <div class="list-group-item">
         <div>{{request.request.method}} {{request.request.url}} {{request.request.httpVersion}}</div>
-        <div ng-repeat="header in request.request.headers">
+        <div ng-repeat="header in request.request.headers" class="network-header">
           {{header.name}}: {{header.value}}
         </div>
       </div>
       <div class="list-group-item">
-        <div ng-repeat="header in request.response.headers">
+        <div ng-repeat="header in request.response.headers" class="network-header">
           {{header.name}}: {{header.value}}
         </div>
         <div class="panel panel-default">

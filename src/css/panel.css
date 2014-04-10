@@ -4,3 +4,8 @@ body {
 #contents {
   margin: 10px 0 0 0;
 }
+
+/* Network Tab */
+.network-header {
+  word-break: break-all;
+}
