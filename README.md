@@ -1,9 +1,8 @@
-# Flag Bird Google Chrome Extension
+# Flag Bird Chrome Apps
 
 It may help you to capture the flag.
 
-- ~~HTTP Request~~
-- Network Capture
+- TCP communication
 - Encoder and Decoder (uri encode, base64, caeser, hex)
 - Generate hashes (md5, sha1, sha256, sha512)
 - ~~SQL Injection Tool (also blind SQLi)~~
@@ -12,8 +11,8 @@ It may help you to capture the flag.
 - ~~Simple Binary Editor~~
 
 ## Usage
-1. Import src directory as a chrome extension.
-2. Open developer tools in any page.
+1. Import src directory as a chrome apps.
+2. Launch this app.
 
 ## Screenshots
 ![md5](https://raw.githubusercontent.com/tyage/flag-bird/master/screenshot/md5.gif)
