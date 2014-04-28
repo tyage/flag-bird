@@ -3,11 +3,10 @@
   "name": "Flag Bird",
   "description": "It may useful to capture the flag.",
   "version": "0.1",
-  "devtools_page": "devtools.html",
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
   },
   "permissions": [
     {"socket": ["tcp-connect:*:*"]}
