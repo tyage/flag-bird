@@ -1,4 +1,4 @@
-var app = angular.module('flagBird', ['ngRoute', 'hashTab', 'encDecTab', 'networkTab'])
+var app = angular.module('flagBird', ['ngRoute', 'hashTab', 'encDecTab', 'networkTab', 'socketTab'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
@@ -15,6 +15,10 @@ var app = angular.module('flagBird', ['ngRoute', 'hashTab', 'encDecTab', 'networ
       .when('/network', {
         templateUrl: '/template/tabs/network.html',
         controller: 'NetworkCtrl'
+      })
+      .when('/socket', {
+        templateUrl: '/template/tabs/socket.html',
+        controller: 'SocketCtrl'
       })
       .otherwise({
         path: '/'
