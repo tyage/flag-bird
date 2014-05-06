@@ -12,30 +12,30 @@ angular.module('networkTab', [])
       $scope.socket = socketId;
     };
     var disconnect = function(socketId) {
-      chrome.socket.disconnect(socketId);
-      chrome.socket.destroy(socketId);
+      if (socketId) {
+        chrome.sockets.tcp.close(socketId);
+      }
     };
 
     $scope.connect = function($event) {
-      chrome.socket.create('tcp', {}, function(createInfo) {
+      chrome.sockets.tcp.create({}, function(createInfo) {
         var socketId = createInfo.socketId;
-        chrome.socket.connect(socketId, $scope.ip, +$scope.port, function() {
-          chrome.socket.getInfo(socketId, function(result) {
-            if (result.connected) {
-              disconnect($scope.socket);
-              connect(socketId);
-            } else {
-              disconnect(socketId);
-            }
-            $scope.$apply();
-          });
+        chrome.sockets.tcp.connect(socketId, $scope.ip, +$scope.port, function(result) {
+          if (result === 0) {
+            disconnect($scope.socket);
+            connect(socketId);
+          } else {
+            disconnect(socketId);
+          }
+          $scope.$apply();
         });
+        chrome.sockets.tcp.disconnect(socketId, function() {});
       });
       $event.preventDefault();
     };
     $scope.send = function($event) {
       var data = str2ab($scope.data);
-      chrome.socket.write($scope.socket, data, function(result) {
+      chrome.sockets.tcp.send($scope.socket, data, function(result) {
         $scope.bytesWritten = result.bytesWritten;
         $scope.$apply();
       });
