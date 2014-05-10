@@ -23,13 +23,16 @@ angular.module('networkTab', [])
     };
 
     $scope.connect = function($event) {
+      $scope.connectionStatus = 'start';
       chrome.sockets.tcp.create({}, function(createInfo) {
         var socketId = createInfo.socketId;
         chrome.sockets.tcp.connect(socketId, $scope.ip, +$scope.port, function(result) {
           if (result === 0) {
+            $scope.connectionStatus = 'finish';
             disconnect($scope.socket);
             connect(socketId);
           } else {
+            $scope.connectionStatus = 'failure';
             disconnect(socketId);
           }
           $scope.$apply();

@@ -1,16 +1,29 @@
 <div>
-  <form class="navbar-form navbar-left" role="search" ng-submit="connect($event)">
+  <form class="navbar-form" ng-submit="connect($event)">
     <div class="form-group">
       <input type="text" class="form-control" placeholder="IP" ng-model="ip">
       <input type="text" class="form-control" placeholder="Port" ng-model="port">
     </div>
-    <button type="submit" class="btn btn-default">Connect</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-default">Connect</button>
+    </div>
+    <div>
+      <p class="alert alert-info" ng-show="connectionStatus === 'start'">connecting...</p>
+      <p class="alert alert-success" ng-show="connectionStatus === 'finish'">connected.</p>
+      <p class="alert alert-danger" ng-show="connectionStatus === 'failure'">connection failure.</p>
+    </div>
   </form>
 
-  <div ng-show="socket" class="form-group">
-    <textarea class="form-control col-md-5" rows="2" placeholder="data to send"
-      ng-model="data"></textarea>
-    <button type="submit" class="btn btn-default" ng-click="send($event)">send</button>
-    <p ng-show="bytesWritten !== undefined">{{bytesWritten}} bytes written.</p>
-  </div>
+  <form class="navbar-form" ng-submit="send($event)" ng-show="connectionStatus === 'finish'">
+    <div class="form-group">
+      <textarea class="form-control col-md-5" rows="2" placeholder="data to send"
+        ng-model="data"></textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-default">send</button>
+    </div>
+    <div>
+      <p ng-show="bytesWritten !== undefined">{{bytesWritten}} bytes written.</p>
+    </div>
+  </form>
 </div>
