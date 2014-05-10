@@ -12,8 +12,13 @@ angular.module('networkTab', [])
       $scope.socket = socketId;
     };
     var disconnect = function(socketId) {
+      if ($scope.socket === socketId) {
+        $scope.socket = null;
+      }
       if (socketId) {
-        chrome.sockets.tcp.close(socketId);
+        chrome.sockets.tcp.disconnect(socketId, function() {
+          chrome.sockets.tcp.close(socketId);
+        });
       }
     };
 
@@ -29,7 +34,6 @@ angular.module('networkTab', [])
           }
           $scope.$apply();
         });
-        chrome.sockets.tcp.disconnect(socketId, function() {});
       });
       $event.preventDefault();
     };
