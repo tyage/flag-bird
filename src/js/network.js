@@ -59,7 +59,6 @@ angular.module('networkTab', [])
       $event.preventDefault();
     };
     chrome.sockets.tcp.onReceive.addListener(function(data) {
-      window.data = data;
       $scope.packets.push({
         type: 'receive',
         data: ab2str(data.data)

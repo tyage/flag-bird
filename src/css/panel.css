@@ -1,6 +1,10 @@
+html {
+  overflow: scroll;
+}
 body {
   margin: 10px;
   overflow: scroll;
+  -webkit-user-select: auto;
 }
 #contents {
   margin: 10px 0 0 0;
