@@ -43,7 +43,7 @@ angular.module('networkTab', [])
     $scope.send = function($event) {
       var data = str2ab($scope.data);
       chrome.sockets.tcp.send($scope.socket, data, function(result) {
-        $scope.bytesWritten = result.bytesWritten;
+        $scope.bytesSent = result.bytesSent;
         $scope.$apply();
       });
 
