@@ -7,7 +7,7 @@ angular.module('networkTab', [])
         bufView[i] = str.charCodeAt(i);
       }
       return buf;
-    }
+    };
     var connect = function(socketId) {
       $scope.socket = socketId;
     };
