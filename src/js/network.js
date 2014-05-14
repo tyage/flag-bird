@@ -1,16 +1,5 @@
-angular.module('networkTab', [])
-  .controller('NetworkCtrl', ['$scope', function($scope) {
-    var ab2str = function(buf) {
-      return String.fromCharCode.apply(null, new Uint8Array(buf));
-    };
-    var str2ab = function(str) {
-      var buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
-      var bufView = new Uint8Array(buf);
-      for (var i = 0, strLen = str.length; i < strLen; i++) {
-        bufView[i] = str.charCodeAt(i);
-      }
-      return buf;
-    };
+angular.module('networkTab', ['abConverter'])
+  .controller('NetworkCtrl', ['$scope', 'abConverter', function($scope, abConverter) {
     var connect = function(socketId) {
       $scope.socket = socketId;
     };
@@ -50,7 +39,7 @@ angular.module('networkTab', [])
         type: 'send',
         data: $scope.sendingData
       });
-      var data = str2ab($scope.sendingData);
+      var data = abConverter.str2ab($scope.sendingData);
       chrome.sockets.tcp.send($scope.socket, data, function(result) {
         $scope.bytesSent = result.bytesSent;
         $scope.$apply();
@@ -61,7 +50,7 @@ angular.module('networkTab', [])
     chrome.sockets.tcp.onReceive.addListener(function(data) {
       $scope.packets.push({
         type: 'receive',
-        data: ab2str(data.data)
+        data: abConverter.ab2str(data.data)
       });
       $scope.$apply();
     });
