@@ -25,6 +25,14 @@
         ng-model="sendingData" ng-trim="false"></textarea>
     </div>
     <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="useCrlf">
+          use \r\n
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-default">send</button>
     </div>
   </form>

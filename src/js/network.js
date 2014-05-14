@@ -17,7 +17,9 @@ angular.module('networkTab', ['abConverter'])
     $scope.packets = [];
     $scope.connect = function($event) {
       $scope.connectionStatus = 'start';
-      chrome.sockets.tcp.create({}, function(createInfo) {
+      chrome.sockets.tcp.create({
+        bufferSize: 8192
+      }, function(createInfo) {
         var socketId = createInfo.socketId;
         chrome.sockets.tcp.connect(socketId, $scope.ip, +$scope.port, function(result) {
           if (result === 0) {
@@ -39,11 +41,13 @@ angular.module('networkTab', ['abConverter'])
         type: 'send',
         data: $scope.sendingData
       });
+      if ($scope.useCrlf) {
+        $scope.sendingData = $scope.sendingData.replace(/\r\n/g, '\n');
+        $scope.sendingData = $scope.sendingData.replace(/\r/g, '\n');
+        $scope.sendingData = $scope.sendingData.replace(/\n/g, '\r\n');
+      }
       var data = abConverter.str2ab($scope.sendingData);
-      chrome.sockets.tcp.send($scope.socket, data, function(result) {
-        $scope.bytesSent = result.bytesSent;
-        $scope.$apply();
-      });
+      chrome.sockets.tcp.send($scope.socket, data, function() {});
 
       $event.preventDefault();
     };
