@@ -1,9 +1,9 @@
 html {
-  overflow: scroll;
+  overflow: auto;
 }
 body {
   margin: 10px;
-  overflow: scroll;
+  overflow: auto;
   -webkit-user-select: auto;
 }
 #contents {

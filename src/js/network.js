@@ -27,7 +27,7 @@ angular.module('networkTab', ['abConverter'])
         bufferSize: 8192
       }, function(createInfo) {
         var socketId = createInfo.socketId;
-        chrome.sockets.tcp.connect(socketId, $scope.ip, +$scope.port, function(result) {
+        chrome.sockets.tcp.connect(socketId, $scope.host, +$scope.port, function(result) {
           if (result === 0) {
             $scope.connectionStatus = 'finish';
             disconnect($scope.socket);
