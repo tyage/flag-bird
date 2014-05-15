@@ -12,10 +12,11 @@ body {
 
 
 /* network tab */
-.packet-hex {
+.packet-raw {
   word-break: break-all;
 }
-.packet-hex span {
-  width: 30px;
+.packet-raw span {
+  width: 18px;
   display: inline-block;
+  font-size: 12px;
 }

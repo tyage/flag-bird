@@ -41,9 +41,22 @@
     <div class="panel panel-default" ng-repeat="packet in packets">
       <div class="panel-heading">{{packet.type}}</div>
       <div class="panel-body">
-        <pre>{{packet.string}}</pre>
-        <div class="packet-hex" ng-if="packet.raw">
-          <span ng-repeat="hex in packet.raw track by $index">{{hex}}</span>
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: packet.tab === 'string'}"><a ng-click="packet.tab='string'">String</a></li>
+          <li ng-class="{active: packet.tab === 'hex'}"><a ng-click="packet.tab='hex'">Hex</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane" ng-class="{active: packet.tab === 'string'}">
+            <pre>{{packet.string}}</pre>
+          </div>
+          <div class="tab-pane packet-raw" ng-if="packet.raw" ng-class="{active: packet.tab === 'hex'}">
+            <div class="col-sm-6">
+              <span ng-repeat="hex in packet.raw track by $index">{{hex2Char(hex)}}</span>
+            </div>
+            <div class="col-sm-6">
+              <span ng-repeat="hex in packet.raw track by $index">{{hex}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
