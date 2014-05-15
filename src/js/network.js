@@ -13,6 +13,12 @@ angular.module('networkTab', ['abConverter'])
         });
       }
     };
+    var ab2Hex = function(ab) {
+      var raw = new Uint8Array(ab);
+      return _.map(raw, function(byte) {
+        return ('0' + byte.toString(16)).slice(-2);
+      });
+    };
 
     $scope.packets = [];
     $scope.connect = function($event) {
@@ -37,11 +43,6 @@ angular.module('networkTab', ['abConverter'])
       $event.preventDefault();
     };
     $scope.send = function($event) {
-      $scope.packets.push({
-        type: 'send',
-        string: $scope.sendingData,
-        tab: 'string'
-      });
       if ($scope.useCrlf) {
         $scope.sendingData = $scope.sendingData.replace(/\r\n/g, '\n');
         $scope.sendingData = $scope.sendingData.replace(/\r/g, '\n');
@@ -49,6 +50,12 @@ angular.module('networkTab', ['abConverter'])
       }
       var data = abConverter.str2ab($scope.sendingData);
       chrome.sockets.tcp.send($scope.socket, data, function() {});
+      $scope.packets.push({
+        type: 'send',
+        string: $scope.sendingData,
+        raw: ab2Hex(data),
+        tab: 'string'
+      });
 
       $event.preventDefault();
     };
@@ -58,17 +65,12 @@ angular.module('networkTab', ['abConverter'])
     };
 
     chrome.sockets.tcp.onReceive.addListener(function(data) {
-      var raw = new Uint8Array(data.data);
-      var rawHex = _.map(raw, function(byte) {
-        return ('0' + byte.toString(16)).slice(-2);
-      });
-      var packet = {
+      $scope.packets.push({
         type: 'receive',
-        raw: rawHex,
         string: abConverter.ab2str(data.data),
+        raw: ab2Hex(data.data),
         tab: 'string'
-      };
-      $scope.packets.push(packet);
+      });
       $scope.$apply();
     });
   }]);
