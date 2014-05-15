@@ -39,7 +39,7 @@ angular.module('networkTab', ['abConverter'])
     $scope.send = function($event) {
       $scope.packets.push({
         type: 'send',
-        data: $scope.sendingData
+        string: $scope.sendingData
       });
       if ($scope.useCrlf) {
         $scope.sendingData = $scope.sendingData.replace(/\r\n/g, '\n');
@@ -52,10 +52,16 @@ angular.module('networkTab', ['abConverter'])
       $event.preventDefault();
     };
     chrome.sockets.tcp.onReceive.addListener(function(data) {
-      $scope.packets.push({
-        type: 'receive',
-        data: abConverter.ab2str(data.data)
+      var raw = new Uint8Array(data.data);
+      var rawHex = _.map(raw, function(byte) {
+        return ('0' + byte.toString(16)).slice(-2);
       });
+      var packet = {
+        type: 'receive',
+        raw: rawHex,
+        string: abConverter.ab2str(data.data)
+      };
+      $scope.packets.push(packet);
       $scope.$apply();
     });
   }]);

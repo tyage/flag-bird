@@ -9,3 +9,13 @@ body {
 #contents {
   margin: 10px 0 0 0;
 }
+
+
+/* network tab */
+.packet-hex {
+  word-break: break-all;
+}
+.packet-hex span {
+  width: 30px;
+  display: inline-block;
+}
