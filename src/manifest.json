@@ -13,6 +13,9 @@
   "sockets": {
     "tcp": {
       "connect": "*:*"
+    },
+    "udp": {
+      "connect": "*:*"
     }
   }
 }
