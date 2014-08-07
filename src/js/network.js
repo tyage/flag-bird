@@ -50,11 +50,22 @@ angular.module('networkTab', ['abConverter'])
       }
       var data = abConverter.str2ab($scope.sendingData);
       chrome.sockets.tcp.send($scope.socket, data, function() {});
-      $scope.packets.push({
-        type: 'send',
-        string: $scope.sendingData,
-        raw: ab2Hex(data),
-        tab: 'string'
+      chrome.sockets.tcp.getInfo($scope.socket, function(socket) {
+        $scope.packets.push({
+          type: 'send',
+          peer: {
+            address: socket.peerAddress,
+            port: socket.peerPort
+          },
+          local: {
+            address: socket.localAddress,
+            port: socket.localPort
+          },
+          string: $scope.sendingData,
+          raw: ab2Hex(data),
+          tab: 'string'
+        });
+        $scope.$apply();
       });
 
       $event.preventDefault();
@@ -65,12 +76,22 @@ angular.module('networkTab', ['abConverter'])
     };
 
     chrome.sockets.tcp.onReceive.addListener(function(data) {
-      $scope.packets.push({
-        type: 'receive',
-        string: abConverter.ab2str(data.data),
-        raw: ab2Hex(data.data),
-        tab: 'string'
+      chrome.sockets.tcp.getInfo(data.socketId, function(socket) {
+        $scope.packets.push({
+          type: 'receive',
+          peer: {
+            address: socket.peerAddress,
+            port: socket.peerPort
+          },
+          local: {
+            address: socket.localAddress,
+            port: socket.localPort
+          },
+          string: abConverter.ab2str(data.data),
+          raw: ab2Hex(data.data),
+          tab: 'string'
+        });
+        $scope.$apply();
       });
-      $scope.$apply();
     });
   }]);
