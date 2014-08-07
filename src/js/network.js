@@ -74,6 +74,10 @@ angular.module('networkTab', ['abConverter'])
       var charCode = parseInt(hex, 16);
       return String.fromCharCode(charCode);
     };
+    $scope.deletePacket = function(packet) {
+      var index = $scope.packets.indexOf(packet);
+      $scope.packets.splice(index, 1);
+    };
 
     chrome.sockets.tcp.onReceive.addListener(function(data) {
       chrome.sockets.tcp.getInfo(data.socketId, function(socket) {

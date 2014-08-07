@@ -43,6 +43,7 @@
         {{packet.type}}
         (peer: {{packet.peer.address}}:{{packet.peer.port}},
         local: {{packet.local.address}}:{{packet.local.port}})
+        <p class="close" ng-click="deletePacket(packet)">x</p>
       </div>
       <div class="panel-body">
         <ul class="nav nav-tabs">
