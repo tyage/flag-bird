@@ -9,10 +9,16 @@
             ng-trim="false" ng-model="inputText"></textarea>
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-md-1 control-label">use \r\n</label>
+        <div class="col-md-5">
+          <input type="checkbox" ng-model="useCrlf">
+        </div>
+      </div>
       <div class="form-group" ng-repeat="(name, method) in hashMethods">
         <label class="col-md-1 control-label">{{name}}</label>
         <div class="col-md-5">
-          <pre>{{method(inputText).toString()}}</pre>
+          <pre>{{method(crlf(inputText)).toString()}}</pre>
         </div>
       </div>
     </form>

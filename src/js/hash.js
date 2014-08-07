@@ -1,5 +1,5 @@
-angular.module('hashTab', [])
-  .controller('HashCtrl', ['$scope', function($scope) {
+angular.module('hashTab', ['crlf'])
+  .controller('HashCtrl', ['$scope', 'crlf', function($scope, crlf) {
     $scope.hashMethods = {
       length: function(str) {
         return str ? str.length : 0;
@@ -9,4 +9,7 @@ angular.module('hashTab', [])
       sha256: CryptoJS.SHA256,
       sha512: CryptoJS.SHA512
     };
+    $scope.crlf = function(data) {
+      return $scope.useCrlf ? crlf.toCrlf(data) : data;
+    }
   }]);
