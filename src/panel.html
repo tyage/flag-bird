@@ -15,7 +15,12 @@
       <li ng-class="{active: currentPath === '/enc-dec'}"><a href="#/enc-dec">Enc / Dec</a></li>
       <li ng-class="{active: currentPath === '/network'}"><a href="#/network">Network</a></li>
     </ul>
-    <div id="contents" ng-view></div>
+    <div id="contents">
+      <div ng-show="currentPath === '/'" ng-include="templateUrls.home"></div>
+      <div ng-show="currentPath === '/hash'" ng-include="templateUrls.hash"></div>
+      <div ng-show="currentPath === '/enc-dec'" ng-include="templateUrls.encDec"></div>
+      <div ng-show="currentPath === '/network'" ng-include="templateUrls.network"></div>
+    </div>
   </div>
 
   <script src="/js/vendor/jquery-2.1.0.min.js"></script>
