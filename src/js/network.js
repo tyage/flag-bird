@@ -1,5 +1,5 @@
-angular.module('networkTab', ['abConverter'])
-  .controller('NetworkCtrl', ['$scope', 'abConverter', function($scope, abConverter) {
+angular.module('networkTab', ['abConverter', 'crlf'])
+  .controller('NetworkCtrl', ['$scope', 'abConverter', 'crlf', function($scope, abConverter, crlf) {
     var connect = function(socketId) {
       $scope.socket = socketId;
     };
@@ -43,12 +43,8 @@ angular.module('networkTab', ['abConverter'])
       $event.preventDefault();
     };
     $scope.send = function($event) {
-      if ($scope.useCrlf) {
-        $scope.sendingData = $scope.sendingData.replace(/\r\n/g, '\n');
-        $scope.sendingData = $scope.sendingData.replace(/\r/g, '\n');
-        $scope.sendingData = $scope.sendingData.replace(/\n/g, '\r\n');
-      }
-      var data = abConverter.str2ab($scope.sendingData);
+      var sendingData = $scope.useCrlf ? crlf.toCrlf($scope.sendingData) : $scope.sendingData;
+      var data = abConverter.str2ab(sendingData);
       chrome.sockets.tcp.send($scope.socket, data, function() {});
       chrome.sockets.tcp.getInfo($scope.socket, function(socket) {
         $scope.packets.push({
@@ -61,7 +57,7 @@ angular.module('networkTab', ['abConverter'])
             address: socket.localAddress,
             port: socket.localPort
           },
-          string: $scope.sendingData,
+          string: sendingData,
           raw: ab2Hex(data),
           tab: 'string'
         });
