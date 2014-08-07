@@ -1,4 +1,4 @@
-angular.module('encDecTab', [])
+angular.module('encDecTab', ['crlf'])
   .service('caesar', function() {
     // a-z and A-Z
     var alphabets = [
@@ -32,7 +32,7 @@ angular.module('encDecTab', [])
       return output;
     };
   })
-  .controller('EncDecCtrl', ['$scope', 'caesar', function($scope, caesar) {
+  .controller('EncDecCtrl', ['$scope', 'caesar', 'crlf', function($scope, caesar, crlf) {
     var cryptoJsEnc = function(str, method) {
       var utf8Str = CryptoJS.enc.Utf8.parse(str);
       return utf8Str.toString(method);
@@ -104,5 +104,8 @@ angular.module('encDecTab', [])
     });
     $scope.$watch('method', function() {
       $scope.encoded = $scope.method.enc($scope.decoded);
+    });
+    $scope.$watch('useCrlf', function() {
+      $scope.encoded = $scope.method.enc($scope.useCrlf ? crlf.toCrlf($scope.decoded) : $scope.decoded);
     });
 }]);
