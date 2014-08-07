@@ -1,0 +1,5 @@
+<div ng-controller="HexViewerCtrl">
+  <div class="col-sm-6">
+    <span ng-repeat="byte in data track by $index">{{byte2Hex(byte)}}</span>
+  </div>
+</div>
