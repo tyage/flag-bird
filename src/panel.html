@@ -14,12 +14,14 @@
       <li ng-class="{active: currentPath === '/hash'}"><a href="#/hash">Hash</a></li>
       <li ng-class="{active: currentPath === '/enc-dec'}"><a href="#/enc-dec">Enc / Dec</a></li>
       <li ng-class="{active: currentPath === '/network'}"><a href="#/network">Network</a></li>
+      <li ng-class="{active: currentPath === '/hex-editor'}"><a href="#/hex-editor">Hex editor</a></li>
     </ul>
     <div id="contents">
       <div ng-show="currentPath === '/'" ng-include="templateUrls.home"></div>
       <div ng-show="currentPath === '/hash'" ng-include="templateUrls.hash"></div>
       <div ng-show="currentPath === '/enc-dec'" ng-include="templateUrls.encDec"></div>
       <div ng-show="currentPath === '/network'" ng-include="templateUrls.network"></div>
+      <div ng-show="currentPath === '/hex-editor'" ng-include="templateUrls.hexEditor"></div>
     </div>
   </div>
 
