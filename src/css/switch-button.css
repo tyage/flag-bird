@@ -1,0 +1,23 @@
+.switch-buttons {
+  display: inline-block;
+}
+.switch-button {
+  display: inline-block;
+  margin: 0 -1px 0 0;
+  border: 1px solid rgb(61, 75, 91);
+  padding: 4px 8px;
+  background: white;
+  color: rgb(61, 75, 91);;
+}
+.switch-button.active {
+  background: #2a80b9;
+  color: white;
+}
+.switch-button:first-child {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.switch-button:last-child {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}

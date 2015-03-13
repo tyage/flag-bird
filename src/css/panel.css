@@ -10,8 +10,15 @@ body {
   margin: 10px 0 0 0;
 }
 
-
 /* network tab */
+.network-connect-form .alert {
+  padding: 5px 15px;
+  margin: 0 0 0 20px;
+  display: inline-block;
+}
+.packet-header .switch-buttons {
+  margin: 0 10px 0 0;
+}
 .packet-raw {
   word-break: break-all;
 }
@@ -19,4 +26,10 @@ body {
   width: 18px;
   display: inline-block;
   font-size: 12px;
+}
+.packet-string pre {
+  margin: 0;
+  background: white;
+  border: 0;
+  padding: 0;
 }
