@@ -54,10 +54,10 @@
             <pre>{{packet.string}}</pre>
           </div>
           <div class="tab-pane packet-raw" ng-if="packet.raw" ng-class="{active: packet.tab === 'hex'}">
-            <div class="col-sm-6">
+            <div class="col-sm-6 packet-raw-string">
               <span ng-repeat="hex in packet.raw track by $index">{{hex2Char(hex)}}</span>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 packet-raw-hex">
               <span ng-repeat="hex in packet.raw track by $index">{{hex}}</span>
             </div>
           </div>

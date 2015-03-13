@@ -27,6 +27,9 @@ body {
   display: inline-block;
   font-size: 12px;
 }
+.packet-raw .packet-raw-string {
+  border-right: 1px solid #ddd;
+}
 .packet-string pre {
   margin: 0;
   background: white;
