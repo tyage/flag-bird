@@ -39,7 +39,11 @@ angular.module('encDecTab', ['crlf'])
     };
     var cryptoJsDec = function(str, method) {
       var decodedStr = method.parse(str);
-      return decodedStr.toString(CryptoJS.enc.Utf8);
+      try {
+        return decodedStr.toString(CryptoJS.enc.Utf8);
+      } catch (e) {
+        return null;
+      }
     };
     $scope.encodedFocus = false;
     $scope.decodedFocus = false;
