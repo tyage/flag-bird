@@ -9,5 +9,8 @@ var app = angular.module('flagBird', ['ngRoute', 'hashTab', 'encDecTab', 'networ
     };
     $scope.$on('$locationChangeStart', function(newVal) {
       $scope.currentPath = $location.path();
+      if ($scope.currentPath === "") {
+        $scope.currentPath = "/";
+      }
     });
   }]);
