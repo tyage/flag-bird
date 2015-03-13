@@ -54,7 +54,7 @@ angular.module('encDecTab', ['crlf'])
           return cryptoJsEnc(str, CryptoJS.enc.Base64);
         },
         dec: function(str) {
-          return cryptoJsDec(str, CryptoJS.enc.Base64);
+          return cryptoJsDec(str.replace(/\n|\r/g, ""), CryptoJS.enc.Base64);
         },
       },
       hex: {
