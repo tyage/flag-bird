@@ -7,11 +7,18 @@
   border: 1px solid rgb(61, 75, 91);
   padding: 4px 8px;
   background: white;
-  color: rgb(61, 75, 91);;
+  color: rgb(61, 75, 91);
+  cursor: pointer;
+}
+.switch-button:hover {
+  background: #eee;
 }
 .switch-button.active {
   background: #2a80b9;
   color: white;
+}
+.switch-button.active:hover {
+  background: rgb(30, 94, 136);
 }
 .switch-button:first-child {
   border-bottom-left-radius: 10px;
