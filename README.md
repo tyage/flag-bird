@@ -1,5 +1,7 @@
 # Flag Bird Chrome Apps
 
+<https://chrome.google.com/webstore/detail/flag-bird/jdlmmmijcablfmmdohiligiopigdlbbi>
+
 It may help you to capture the flag.
 
 - TCP communication
@@ -10,9 +12,11 @@ It may help you to capture the flag.
 - ~~CTF Time Rating Calculator~~
 - ~~Simple Binary Editor~~
 
-## Usage
+## Manual usage
+
 1. Import src directory as a chrome apps.
 2. Launch this app.
 
 ## Screenshots
+
 ![md5](https://raw.githubusercontent.com/tyage/flag-bird/master/screenshot/md5.gif)
