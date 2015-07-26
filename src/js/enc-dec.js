@@ -32,7 +32,47 @@ angular.module('encDecTab', ['crlf'])
       return output;
     };
   })
-  .controller('EncDecCtrl', ['$scope', 'caesar', 'crlf', function($scope, caesar, crlf) {
+  .service('entity', function() {
+    this.encMethod = {
+      decimal: function (charCode) {
+        return '&#' + charCode.toString(10) + ';';
+      },
+      hex: function (charCode) {
+        return '&#x' + charCode.toString(16) + ';';
+      },
+      // ToDo
+      string: function (charCode) {
+      }
+    };
+    this.decMethod = {
+      decimal: function (str) {
+        var charCode = str.slice(2, -1);
+        return String.fromCharCode(charCode);
+      },
+      hex: function (str) {
+        if (str[2] !== 'x') {
+          return str;
+        }
+        var charCode = str.slice(3, -1);
+        return String.fromCharCode(parseInt(charCode, 16));
+      },
+      // ToDo
+      string: function (str) {
+      }
+    };
+    this.enc = function (str, base) {
+      var output = '';
+      for (var i=0,l=str.length;i<l;++i) {
+        output += this.encMethod[base](str.charCodeAt(i));
+      }
+      return output;
+    };
+    this.dec = function (str, base) {
+      var output = str.replace(/&#?[a-zA-Z0-9]+;/g, this.decMethod[base]);
+      return output;
+    };
+  })
+  .controller('EncDecCtrl', ['$scope', 'caesar', 'entity', 'crlf', function($scope, caesar, entity, crlf) {
     var cryptoJsEnc = function(str, method) {
       var utf8Str = CryptoJS.enc.Utf8.parse(str);
       return utf8Str.toString(method);
@@ -51,6 +91,7 @@ angular.module('encDecTab', ['crlf'])
     $scope.encodedFocus = false;
     $scope.decodedFocus = false;
     $scope.caesarRot = 13;
+    $scope.entityBase = 'decimal';
     $scope.methods = {
       base64: {
         enc: function(str) {
@@ -83,6 +124,14 @@ angular.module('encDecTab', ['crlf'])
         dec: function(str) {
           return caesar.rot(str, -$scope.caesarRot);
         }
+      },
+      entity: {
+        enc: function(str) {
+          return entity.enc(str, $scope.entityBase);
+        },
+        dec: function(str) {
+          return entity.dec(str, $scope.entityBase);
+        }
       }
     };
     $scope.method = $scope.methods.base64;
@@ -107,6 +156,9 @@ angular.module('encDecTab', ['crlf'])
       $scope.decoded = $scope.method.dec(newVal);
     });
     $scope.$watch('caesarRot', function() {
+      $scope.encoded = $scope.method.enc($scope.decoded);
+    });
+    $scope.$watch('entityBase', function() {
       $scope.encoded = $scope.method.enc($scope.decoded);
     });
     $scope.$watch('method', function() {

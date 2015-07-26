@@ -14,6 +14,17 @@
           ng-model="caesarRot">
       </div>
     </div>
+    <div class="form-group" ng-show="method === methods.entity">
+      <label class="col-md-1 control-label">Entity Base</label>
+      <div class="col-md-5">
+        <label class="radio-inline">
+          <input type="radio" ng-model="entityBase" value="decimal">&amp;#10;
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="entityBase" value="hex">&amp;#x10;
+        </label>
+      </div>
+    </div>
     <div class="form-group">
       <label class="col-md-1 control-label">Decoded Result</label>
       <div class="col-md-5">
