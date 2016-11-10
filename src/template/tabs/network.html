@@ -1,64 +1,69 @@
 <div ng-controller="NetworkCtrl">
-  <form class="form-horizontal network-connect-form clearfix" ng-submit="connect($event)">
-    <div class="form-group col-sm-4">
-      <div class="col-sm-6">
-        <input type="text" class="form-control" placeholder="host" ng-model="host">
-      </div>
-      <div class="col-sm-3">
-        <input type="text" class="form-control" placeholder="port" ng-model="port">
-      </div>
-      <div class="col-sm-3">
-        <button type="submit" class="btn btn-default">Connect</button>
-      </div>
-    </div>
-    <div>
-      <p class="alert alert-info" ng-show="connectionStatus === 'start'">connecting...</p>
-      <p class="alert alert-success" ng-show="connectionStatus === 'finish'">connected.</p>
-      <p class="alert alert-danger" ng-show="connectionStatus === 'failure'">connection failure.</p>
-    </div>
-  </form>
-
-  <form ng-submit="send($event)" ng-show="connectionStatus === 'finish'">
-    <div class="form-group">
-      <textarea class="form-control" rows="5" placeholder="data to send"
-        ng-model="sendingData" ng-trim="false"></textarea>
-    </div>
-    <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" ng-model="useCrlf">
-          use \r\n
-        </label>
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-default">send</button>
-    </div>
-  </form>
-
-  <div>
-    <div class="panel panel-default" ng-repeat="packet in packets">
-      <div class="panel-heading packet-header">
-        <div class="switch-buttons">
-          <p class="switch-button" ng-class="{active: packet.tab === 'string'}" ng-click="packet.tab='string'">String</p><!--
-          --><p class="switch-button" ng-class="{active: packet.tab === 'hex'}" ng-click="packet.tab='hex'">Hex</p>
+  <div ng-show="!canUseSocket">
+    <p>Network tab is available with chrome extension :)</p>
+  </div>
+  <div ng-show="canUseSocket">
+    <form class="form-horizontal network-connect-form clearfix" ng-submit="connect($event)">
+      <div class="form-group col-sm-4">
+        <div class="col-sm-6">
+          <input type="text" class="form-control" placeholder="host" ng-model="host">
         </div>
-        {{packet.type}}
-        (peer: {{packet.peer.address}}:{{packet.peer.port}},
-        local: {{packet.local.address}}:{{packet.local.port}})
-        <p class="close" ng-click="deletePacket(packet)">x</p>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" placeholder="port" ng-model="port">
+        </div>
+        <div class="col-sm-3">
+          <button type="submit" class="btn btn-default">Connect</button>
+        </div>
       </div>
-      <div class="panel-body">
-        <div class="tab-content">
-          <div class="tab-pane packet-string" ng-class="{active: packet.tab === 'string'}">
-            <pre>{{packet.string}}</pre>
+      <div>
+        <p class="alert alert-info" ng-show="connectionStatus === 'start'">connecting...</p>
+        <p class="alert alert-success" ng-show="connectionStatus === 'finish'">connected.</p>
+        <p class="alert alert-danger" ng-show="connectionStatus === 'failure'">connection failure.</p>
+      </div>
+    </form>
+
+    <form ng-submit="send($event)" ng-show="connectionStatus === 'finish'">
+      <div class="form-group">
+        <textarea class="form-control" rows="5" placeholder="data to send"
+          ng-model="sendingData" ng-trim="false"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="useCrlf">
+            use \r\n
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">send</button>
+      </div>
+    </form>
+
+    <div>
+      <div class="panel panel-default" ng-repeat="packet in packets">
+        <div class="panel-heading packet-header">
+          <div class="switch-buttons">
+            <p class="switch-button" ng-class="{active: packet.tab === 'string'}" ng-click="packet.tab='string'">String</p><!--
+            --><p class="switch-button" ng-class="{active: packet.tab === 'hex'}" ng-click="packet.tab='hex'">Hex</p>
           </div>
-          <div class="tab-pane packet-raw" ng-if="packet.raw" ng-class="{active: packet.tab === 'hex'}">
-            <div class="col-sm-6 packet-raw-string">
-              <span ng-repeat="hex in packet.raw track by $index">{{hex2Char(hex)}}</span>
+          {{packet.type}}
+          (peer: {{packet.peer.address}}:{{packet.peer.port}},
+          local: {{packet.local.address}}:{{packet.local.port}})
+          <p class="close" ng-click="deletePacket(packet)">x</p>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <div class="tab-pane packet-string" ng-class="{active: packet.tab === 'string'}">
+              <pre>{{packet.string}}</pre>
             </div>
-            <div class="col-sm-6 packet-raw-hex">
-              <span ng-repeat="hex in packet.raw track by $index">{{hex}}</span>
+            <div class="tab-pane packet-raw" ng-if="packet.raw" ng-class="{active: packet.tab === 'hex'}">
+              <div class="col-sm-6 packet-raw-string">
+                <span ng-repeat="hex in packet.raw track by $index">{{hex2Char(hex)}}</span>
+              </div>
+              <div class="col-sm-6 packet-raw-hex">
+                <span ng-repeat="hex in packet.raw track by $index">{{hex}}</span>
+              </div>
             </div>
           </div>
         </div>

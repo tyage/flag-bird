@@ -1,5 +1,11 @@
 angular.module('networkTab', ['abConverter', 'crlf'])
   .controller('NetworkCtrl', ['$scope', 'abConverter', 'crlf', function($scope, abConverter, crlf) {
+    $scope.canUseSocket = window.chrome !== undefined && window.chrome.sockets !== undefined;
+    if (!$scope.canUseSocket) {
+      console.info('network tab is available with chrome extension');
+      return;
+    }
+
     var connect = function(socketId) {
       $scope.socket = socketId;
     };
