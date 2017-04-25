@@ -1,6 +1,6 @@
 # Flag Bird
 
-Github page: <http://tyage.github.io/flag-bird/src/panel.html#/>
+Github page: <https://tyage.github.io/flag-bird/src/panel.html#/>
 
 Chrome App: <https://chrome.google.com/webstore/detail/flag-bird/jdlmmmijcablfmmdohiligiopigdlbbi>
 
